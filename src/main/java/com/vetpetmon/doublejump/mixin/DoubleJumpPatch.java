@@ -1,6 +1,7 @@
 package com.vetpetmon.doublejump.mixin;
 
 import com.mojang.authlib.GameProfile;
+import com.vetpetmon.doublejump.DoubleJumpConfig;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
@@ -30,7 +31,7 @@ public class DoubleJumpPatch extends AbstractClientPlayer {
     private void doubleJump(CallbackInfo info) {
         LocalPlayer player = (LocalPlayer) (Object) this;
         if (player.onGround() || player.onClimbable())
-            jumps = 1;
+            jumps = DoubleJumpConfig.extraJumps;
         else if (!lastJumped && jumps > 0 && player.getDeltaMovement().y < 0) {
             if (player.input.jumping && !player.getAbilities().flying) {
                 if (canJump(player)) {
