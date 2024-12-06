@@ -13,14 +13,19 @@ public class DoubleJumpConfig {
             .comment("Extra Jumps")
             .defineInRange("extraJumps", 1, 0, Integer.MAX_VALUE);
 
+    private static final ForgeConfigSpec.BooleanValue JUMP_NOISE = BUILDER
+            .comment("Jumps make noise").define("jumpSound",true);
+
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static int extraJumps;
+    public static boolean jumpSound;
 
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
         extraJumps = EXTRA_JUMPS.get();
+        jumpSound = JUMP_NOISE.get();
     }
 }
