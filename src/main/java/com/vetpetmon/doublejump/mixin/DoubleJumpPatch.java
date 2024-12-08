@@ -38,7 +38,7 @@ public abstract class DoubleJumpPatch extends AbstractClientPlayer {
         if (player.onGround() || player.onClimbable()) jumps = DoubleJumpConfig.extraJumps;
         else if (!lastJumped && jumps > 0 && player.getDeltaMovement().y < 0) {
             if (player.input.jumping && !player.getAbilities().flying) {
-                if (canJump(player)) {
+                if (canPerformJump(player)) {
                     if (DoubleJumpConfig.jumpSound && jumps > 0) playSound(SoundEvents.BAT_TAKEOFF);
                     --jumps;
                     player.jumpFromGround();
@@ -49,7 +49,7 @@ public abstract class DoubleJumpPatch extends AbstractClientPlayer {
     }
 
     @Unique
-    private boolean canJump(LocalPlayer player) {
+    private boolean canPerformJump(LocalPlayer player) {
         ItemStack chestItemStack = player.getItemBySlot(EquipmentSlot.CHEST);
         return  (chestItemStack.getItem() != Items.ELYTRA && !ElytraItem.isFlyEnabled(chestItemStack)) && !player.isFallFlying() && !player.isPassenger()
                 && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION);
