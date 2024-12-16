@@ -39,7 +39,8 @@ public abstract class DoubleJumpPatch extends AbstractClientPlayer {
         else if (!lastJumped && jumps > 0 && player.getDeltaMovement().y < 0) {
             if (player.input.jumping && !player.getAbilities().flying) {
                 if (canPerformJump(player)) {
-                    if (DoubleJumpConfig.jumpSound && jumps > 0) playSound(SoundEvents.BAT_TAKEOFF);
+                    // TODO: Currently breaks on dedicated servers
+                    //if (DoubleJumpConfig.jumpSound && jumps > 0) playSound(SoundEvents.BAT_TAKEOFF);
                     --jumps;
                     player.jumpFromGround();
                 }
